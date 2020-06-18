@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CounterDisplay from './CounterDisplay';
+import Increment from './Increment';
+import Decrement from './Decrement';
+import CounterReset from './CounterReset';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component{
+
+    state={counter: 0}
+
+    incrementCounter = () => {
+        this.setState({counter: this.state.counter + 1})
+    }
+
+    decrementCounter = () => {
+        this.setState({counter: this.state.counter - 1})
+    }
+
+    resetCounter = () => {
+        this.setState({ counter: 0})
+    }
+
+    render() {
+        return (
+            <div className="counterApp">
+                <div className="counterDisplay">
+                    <CounterDisplay count={this.state.counter}/>
+                </div>
+                <div className="counterButtons">
+                    <Increment incrementCounter={this.incrementCounter} />
+                    <CounterReset resetCounter={this.resetCounter}/>
+                    <Decrement decrementCounter={this.decrementCounter}/>
+                </div>
+            </div>
+        )
+    }
+};
 
 export default App;
